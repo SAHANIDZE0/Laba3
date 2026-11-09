@@ -1,0 +1,13 @@
+﻿.venv_p1/
+.venv_p2/
+.venv_p3/
+.venv_p4/
+venv/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+build/
+dist/
+*.egg-info/
+.DS_Store
+Thumbs.db
