@@ -22,10 +22,6 @@ except FileNotFoundError:
 
 df['date'] = pd.to_datetime(df['date'])
 df['revenue'] = df['qty'] * df['price']
-
-df['date'] = pd.to_datetime(df['date'])
-df['revenue'] = df['qty'] * df['price']
-
 df['week'] = df['date'].dt.to_period('W').dt.start_time
 
 weekly_sales = df.pivot_table(index='week', columns='category', values='revenue', aggfunc='sum').fillna(0)
@@ -41,13 +37,13 @@ categories = weekly_sales.columns
 for cat in categories:
     sales = train[cat]
     actual = test[cat]
-  
+    
     ma_forecast_value = sales.rolling(window=4).mean().iloc[-1]
     ma_forecast = np.full(len(actual), ma_forecast_value)
-
+    
     x_train = np.arange(len(sales))
     coeffs = np.polyfit(x_train, sales, deg=1)
-
+    
     x_test = np.arange(len(sales), len(sales) + len(actual))
     trend_forecast = np.polyval(coeffs, x_test)
     
